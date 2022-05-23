@@ -25,6 +25,7 @@ namespace api_client_Hellerova.ViewModels
         private Films[] _filmy;
         private Zanrs[] _zanry;
         private Films _editedFilm;
+        private Zanrs _editedZanr;
         private ObservableCollection<Films> _filmiky = new ObservableCollection<Films>();
         private ObservableCollection<Zanrs> _zanryky = new ObservableCollection<Zanrs>();
 
@@ -32,6 +33,12 @@ namespace api_client_Hellerova.ViewModels
         {
             get { return _editedFilm; }
             set { _editedFilm = value; NotifyPropertyChanged(); }
+        }
+
+        public Zanrs EditedZanr
+        {
+            get { return _editedZanr; }
+            set { _editedZanr = value; NotifyPropertyChanged(); }
         }
 
         public MainViewModel()
@@ -72,6 +79,12 @@ namespace api_client_Hellerova.ViewModels
             SaveChangesCommand = new RelayCommand(
                 async () => {
                     await _client.PutAsJsonAsync("api/Films/ZmenitAtributy?id=" + EditedFilm.filmid, EditedFilm);
+                }
+                );
+
+            SaveChanges2Command = new RelayCommand(
+                async () => {
+                    await _client.PutAsJsonAsync("api/Zanrs/ZmenitAtributy?id=" + EditedZanr.zanrid, EditedZanr);
                 }
                 );
 
@@ -121,6 +134,7 @@ namespace api_client_Hellerova.ViewModels
         public ObservableCollection<Zanrs> Zanry { get { return _zanryky; } set { _zanryky = value; NotifyPropertyChanged(); RemoveZanrCommand.RaiseCanExecureChanged(); } }
         public RelayCommand ReloadCommand { get; set; }
         public RelayCommand SaveChangesCommand { get; set; }
+        public RelayCommand SaveChanges2Command { get; set; }
         public ParametrizedRelayCommand<Films> RemoveCommand { get; set; }
         public Films Beruska { get { return _beruska; } set { _beruska = value; NotifyPropertyChanged(); RemoveCommand.RaiseCanExecureChanged(); } }
         public ParametrizedRelayCommand<Zanrs> RemoveZanrCommand { get; set; }

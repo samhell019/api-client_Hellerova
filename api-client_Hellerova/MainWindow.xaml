@@ -28,6 +28,7 @@
             <MenuItem Margin="-480, 0, 500, 0" Background="#faedcd" Header="_Delete" Command="{Binding RemoveCommand}" CommandParameter="{Binding Beruska}"/>
             <MenuItem Margin="-150, 0, 100, 0" Background="#faedcd" Header="_Delete" Command="{Binding RemoveZanrCommand}" CommandParameter="{Binding Beruska2}"/>
             <MenuItem Margin="-480, 0, 450, 0" Background="#d8e2dc" Header="_Edit" Click="MenuItem_Click" />
+            <MenuItem Margin="-80, 0, 100, 0" Background="#d8e2dc" Header="_Edit" Click="MenuItem_Click_1" />
         </Menu>
         <Grid>
             <Grid.ColumnDefinitions>

@@ -38,5 +38,17 @@ namespace api_client_Hellerova
                 editWindow.ShowDialog();
             }
         }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (vm.Beruska2 != null)
+            {
+                EditZanrWindow editWindow = new EditZanrWindow();
+                editWindow.DataContext = vm;
+                vm.EditedZanr= vm.Beruska2;
+                editWindow.ShowDialog();
+            }
+
+        }
     }
 }

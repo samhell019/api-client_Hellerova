@@ -15,14 +15,15 @@ using System.Windows.Shapes;
 namespace api_client_Hellerova
 {
     /// <summary>
-    /// Interakční logika pro EditWindow.xaml
+    /// Interakční logika pro EditZanrWindow.xaml
     /// </summary>
-    public partial class EditWindow : Window
+    public partial class EditZanrWindow : Window
     {
-        public EditWindow()
+        public EditZanrWindow()
         {
             InitializeComponent();
         }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
