@@ -24,11 +24,13 @@
     </Window.DataContext>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Margin="20, 0, 500, 0" Background="#ccd5ae" Header="_Load" Command="{Binding ReloadCommand}"/>
-            <MenuItem Margin="-480, 0, 500, 0" Background="#faedcd" Header="_Delete" Command="{Binding RemoveCommand}" CommandParameter="{Binding Beruska}"/>
-            <MenuItem Margin="-150, 0, 100, 0" Background="#faedcd" Header="_Delete" Command="{Binding RemoveZanrCommand}" CommandParameter="{Binding Beruska2}"/>
-            <MenuItem Margin="-480, 0, 450, 0" Background="#d8e2dc" Header="_Edit" Click="MenuItem_Click" />
-            <MenuItem Margin="-80, 0, 100, 0" Background="#d8e2dc" Header="_Edit" Click="MenuItem_Click_1" />
+            <MenuItem Margin="5, 0, 500, 0" Background="#ccd5ae" Header="_Load" Command="{Binding ReloadCommand}"/>
+            <MenuItem Margin="-490, 0, 500, 0" Background="#faedcd" Header="_Delete" Command="{Binding RemoveCommand}" CommandParameter="{Binding Beruska}"/>
+            <MenuItem Margin="-180, 0, 140, 0" Background="#faedcd" Header="_Delete" Command="{Binding RemoveZanrCommand}" CommandParameter="{Binding Beruska2}"/>
+            <MenuItem Margin="-500, 0, 480, 0" Background="#d8e2dc" Header="_Edit" Click="MenuItem_Click" />
+            <MenuItem Margin="-470, 0, 480, 0" Background="#cde5d7" Header="_New"  />
+            <MenuItem Margin="-190, 0, 160, 0" Background="#d8e2dc" Header="_Edit" Click="MenuItem_Click_1" />
+            <MenuItem  Margin="-150, 0, 160, 0" Background="#cde5d7" Header="_New"  />
         </Menu>
         <Grid>
             <Grid.ColumnDefinitions>
