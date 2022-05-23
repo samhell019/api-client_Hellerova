@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,11 +19,20 @@ namespace api_client_Hellerova.ViewModels
         private HttpClient _client;
 
         private string _response;
+        private Films _beruska;
         private string _response2;
+        private Zanrs _beruska2;
         private Films[] _filmy;
         private Zanrs[] _zanry;
+        private Films _editedFilm;
         private ObservableCollection<Films> _filmiky = new ObservableCollection<Films>();
         private ObservableCollection<Zanrs> _zanryky = new ObservableCollection<Zanrs>();
+
+        public Films EditedFilm
+        {
+            get { return _editedFilm; }
+            set { _editedFilm = value; NotifyPropertyChanged(); }
+        }
 
         public MainViewModel()
         {
@@ -58,14 +68,63 @@ namespace api_client_Hellerova.ViewModels
                     }
                 }
                 );
+
+            SaveChangesCommand = new RelayCommand(
+                async () => {
+                    await _client.PutAsJsonAsync("api/Films/ZmenitAtributy?id=" + EditedFilm.filmid, EditedFilm);
+                }
+                );
+
+            RemoveCommand = new ParametrizedRelayCommand<Films>(
+             async (value) =>
+             {
+                 HttpResponseMessage response = new HttpResponseMessage();
+                 response = await _client.GetAsync("api/Films/VypsatFilmy");
+                 if (response.IsSuccessStatusCode)
+                 {
+                     response = await _client.DeleteAsync($"api/Films/SmazatFilm?id={value.filmid}");
+                     Filmy.Remove(value);
+                 }
+                 else
+                 {
+                     Filmy.Clear();
+                 }
+             },
+             (parameter) => { return Beruska == null ? false : true; }
+             );
+
+
+            RemoveZanrCommand = new ParametrizedRelayCommand<Zanrs>(
+             async (value) =>
+             {
+                 HttpResponseMessage response = new HttpResponseMessage();
+                 response = await _client.GetAsync("api/Zanrs/VypsatZanry");
+                 if (response.IsSuccessStatusCode)
+                 {
+                     response = await _client.DeleteAsync($"api/Zanrs/SmazatZanr?id={value.zanrid}");
+                     Zanry.Remove(value);
+                 }
+                 else
+                 {
+                     Zanry.Clear();
+                 }
+             },
+             (parameter) => { return Beruska2 == null ? false : true; }
+             );
+
         }
         public string Response { get { return _response; } set { _response = value; NotifyPropertyChanged(); } }
         public string Response2 { get { return _response2; } set { _response2 = value; NotifyPropertyChanged(); } }
 
-        public ObservableCollection<Films> Filmy { get { return _filmiky; } set { _filmiky = value; NotifyPropertyChanged(); } }
+        public ObservableCollection<Films> Filmy { get { return _filmiky; } set { _filmiky = value; NotifyPropertyChanged(); RemoveCommand.RaiseCanExecureChanged(); } }
 
-        public ObservableCollection<Zanrs> Zanry { get { return _zanryky; } set { _zanryky = value; NotifyPropertyChanged(); } }
+        public ObservableCollection<Zanrs> Zanry { get { return _zanryky; } set { _zanryky = value; NotifyPropertyChanged(); RemoveZanrCommand.RaiseCanExecureChanged(); } }
         public RelayCommand ReloadCommand { get; set; }
+        public RelayCommand SaveChangesCommand { get; set; }
+        public ParametrizedRelayCommand<Films> RemoveCommand { get; set; }
+        public Films Beruska { get { return _beruska; } set { _beruska = value; NotifyPropertyChanged(); RemoveCommand.RaiseCanExecureChanged(); } }
+        public ParametrizedRelayCommand<Zanrs> RemoveZanrCommand { get; set; }
+        public Zanrs Beruska2 { get { return _beruska2; } set { _beruska2 = value; NotifyPropertyChanged(); RemoveZanrCommand.RaiseCanExecureChanged(); } }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
