@@ -22,7 +22,7 @@ namespace api_client_Hellerova
     public partial class MainWindow : Window
     {
         private MainViewModel vm;
-        internal MainWindow()
+        public MainWindow()
         {
             InitializeComponent();
             vm = (MainViewModel)DataContext;
@@ -50,5 +50,48 @@ namespace api_client_Hellerova
             }
 
         }
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            AddFilmWindow addWindow = new AddFilmWindow();
+            addWindow.DataContext = vm;
+            vm.NewFilm = new Models.Films();
+            addWindow.ShowDialog();
+        }
+
+        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        {
+            AddZanrWindow addWindow = new AddZanrWindow();
+            addWindow.DataContext = vm;
+            vm.NewZanr = new Models.Zanrs();
+            addWindow.ShowDialog();
+
+        }
+
+        private void MenuItem_Click_4(object sender, RoutedEventArgs e)
+        {
+            if (vm.Beruska != null)
+            {
+                DetailFilmWindow editWindow = new DetailFilmWindow();
+                editWindow.DataContext = vm;
+               vm.EditedFilm = vm.Beruska;
+                editWindow.ShowDialog();
+            }
+        }
+
+
+
+        private void MenuItem_Click_5(object sender, RoutedEventArgs e)
+        {
+            if (vm.Beruska != null)
+            {
+                DetailZanrWindow editWindow = new DetailZanrWindow();
+                editWindow.DataContext = vm;
+                vm.EditedZanr = vm.Beruska2;
+                editWindow.ShowDialog();
+            }
+
+        }
     }
 }
+

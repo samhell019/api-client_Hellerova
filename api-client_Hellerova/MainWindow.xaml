@@ -4,10 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:api_client_Hellerova"
-         xmlns:vm="clr-namespace:api_client_Hellerova.ViewModels"
+        xmlns:vm="clr-namespace:api_client_Hellerova.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" MinHeight="450" MaxWidth="820">
     <Window.Resources>
+        <Style TargetType="MenuItem">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+        <Style TargetType="MenuItem" x:Key="Delete">
+            <Setter Property="Background" Value="#faedcd"/>
+        </Style>
+        <Style TargetType="MenuItem" x:Key="Edit">
+            <Setter Property="Background" Value="#d8e2dc"/>
+        </Style>
+        <Style TargetType="MenuItem" x:Key="New">
+            <Setter Property="Background" Value="#cde5d7"/>
+
+        </Style>
+        <Style TargetType="MenuItem" x:Key="Details">
+            <Setter Property="Background" Value="#fae1dd"/>
+        </Style>
         <DataTemplate x:Key="Films">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding name}"/>
@@ -25,23 +42,53 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Margin="5, 0, 500, 0" Background="#ccd5ae" Header="_Load" Command="{Binding ReloadCommand}"/>
-            <MenuItem Margin="-490, 0, 500, 0" Background="#faedcd" Header="_Delete" Command="{Binding RemoveCommand}" CommandParameter="{Binding Beruska}"/>
-            <MenuItem Margin="-180, 0, 140, 0" Background="#faedcd" Header="_Delete" Command="{Binding RemoveZanrCommand}" CommandParameter="{Binding Beruska2}"/>
-            <MenuItem Margin="-500, 0, 480, 0" Background="#d8e2dc" Header="_Edit" Click="MenuItem_Click" />
-            <MenuItem Margin="-470, 0, 480, 0" Background="#cde5d7" Header="_New"  />
-            <MenuItem Margin="-190, 0, 160, 0" Background="#d8e2dc" Header="_Edit" Click="MenuItem_Click_1" />
-            <MenuItem  Margin="-150, 0, 160, 0" Background="#cde5d7" Header="_New"  />
+            <MenuItem Margin="-490, 0, 500, 0" Style="{StaticResource Delete}" Header="_Delete" Command="{Binding RemoveCommand}" CommandParameter="{Binding Beruska}"/>
+            <MenuItem Margin="-180, 0, 140, 0" Style="{StaticResource Delete}" Header="_Delete" Command="{Binding RemoveZanrCommand}" CommandParameter="{Binding Beruska2}"/>
+            <MenuItem Margin="-500, 0, 480, 0" Style="{StaticResource Edit}" Header="_Edit" Click="MenuItem_Click" />
+            <MenuItem Margin="-470, 0, 480, 0" Style="{StaticResource New}" Header="_New" Click="MenuItem_Click_2"  />
+            <MenuItem Margin="-190, 0, 160, 0" Style="{StaticResource Edit}" Header="_Edit" Click="MenuItem_Click_1" />
+            <MenuItem Margin="-150, 0, 160, 0" Style="{StaticResource New}" Header="_New" Click="MenuItem_Click_3"  />
+            <MenuItem Margin="-520, 0, 500, 0" Style="{StaticResource Details}" Header="_Details" Click="MenuItem_Click_4" />
+            <MenuItem Margin="-180, 0, 150, 0" Style="{StaticResource Details}" Header="_Details" Click="MenuItem_Click_5"/>
         </Menu>
-        <Grid>
+        <Grid Background=" #e2cfc4">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="37*"/>
-                <ColumnDefinition Width="57*"/>
-                <ColumnDefinition Width="306*"/>
-                <ColumnDefinition Width="400*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBox Text="{Binding Response}" TextWrapping="Wrap" Grid.ColumnSpan="3" />
-            <ListBox Background=" #e2cfc4" ItemsSource="{Binding Filmy}" Grid.Column="0" ItemTemplate="{StaticResource Films}" SelectedItem="{Binding Beruska}" Grid.ColumnSpan="3"/>
-            <ListBox Background=" #e2cfc4" ItemsSource="{Binding Zanry}" Grid.Column="3" ItemTemplate="{StaticResource Zanrs}" SelectedItem="{Binding Beruska2}"/>
+            <Border BorderBrush="Black" Grid.Column="0" BorderThickness="0,0,4,0">
+                <ListBox FontSize="15" ItemsSource="{Binding Filmy}" Grid.Column="0" ItemTemplate="{StaticResource Films}" SelectedItem="{Binding Beruska}" Grid.ColumnSpan="2">
+
+                    <ListBox.Template >
+                        <ControlTemplate>
+                            <StackPanel>
+                                <TextBlock TextAlignment="Center" Background="#d5bdaf" FontSize="20" Text="Filmy" FontWeight="Bold"/>
+                                <TextBox x:Name="Searchf"></TextBox>
+                                <Button Background="#ccd5ae" Command="{Binding FilterCommand2}" CommandParameter="{Binding ElementName=Searchf, Path=Text,Mode=TwoWay}">Vyhledat</Button>
+                                <ItemsPresenter></ItemsPresenter>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </ListBox.Template>
+                </ListBox>
+            </Border>
+            <ListBox FontSize="15" ItemsSource="{Binding Zanry}" Grid.Column="3" ItemTemplate="{StaticResource Zanrs}" SelectedItem="{Binding Beruska2}">
+                <ListBox.Template>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <TextBlock  Background="#d5bdaf" TextAlignment="Center" FontSize="20" Text="Žánry" FontWeight="Bold"/>
+                            <TextBox x:Name="Searchz" ></TextBox>
+                            <Button Background="#ccd5ae" Command="{Binding FilterCommand}" CommandParameter="{Binding ElementName=Searchz, Path=Text,Mode=TwoWay}">Vyhledat</Button>
+                            <ItemsPresenter></ItemsPresenter>
+                        </StackPanel>
+                    </ControlTemplate>
+                </ListBox.Template>
+            </ListBox>
+            <StackPanel Margin="0,440,0,0" Grid.Column="1" Background="#d5bdaf">
+                <Label HorizontalAlignment="Center" FontSize="15" Content="{Binding StatusMessage}"></Label>
+            </StackPanel>
+            <StackPanel Margin="0,440,4,0" Grid.Column="0" Background="#d5bdaf">
+                <Label HorizontalAlignment="Center"  FontSize="15" Content="{Binding StatusMessage2}"></Label>
+            </StackPanel>
         </Grid>
     </DockPanel>
 </Window>

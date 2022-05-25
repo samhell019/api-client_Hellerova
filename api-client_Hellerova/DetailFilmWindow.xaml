@@ -1,0 +1,21 @@
+﻿<Window x:Class="api_client_Hellerova.DetailFilmWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:api_client_Hellerova"
+        mc:Ignorable="d"
+       Title="EditWindow" Height="350" Width="330">
+    <Grid>
+        <StackPanel Background=" #e2cfc4" Orientation="Vertical" >
+            <TextBlock Margin="5" Background="#d5bdaf" TextAlignment="Center" FontSize="20" Text="Detaily Filmu" FontWeight="Bold"/>
+            <Label HorizontalAlignment="Center" >Name</Label>
+            <TextBlock Margin="60,0,60,0" Height="20" Background="White" Text="{Binding EditedFilm.name}"/>
+            <Label HorizontalAlignment="Center" >Zanr Id</Label>
+            <TextBlock Margin="60,0,60,0" Height="20" Background="White" Text="{Binding EditedFilm.zanrid}"/>
+            <Label HorizontalAlignment="Center"  >Film Id</Label>
+            <TextBlock Margin="60,0,60,0" Height="20" Background="White" Text="{Binding EditedFilm.filmid}"/>
+            <Button Margin="20" Click="Button_Click" Background="#ffdab9" >Storno</Button>
+        </StackPanel>
+    </Grid>
+</Window>

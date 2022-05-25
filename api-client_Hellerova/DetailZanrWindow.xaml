@@ -1,0 +1,29 @@
+﻿<Window x:Class="api_client_Hellerova.DetailZanrWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:api_client_Hellerova"
+        mc:Ignorable="d"
+        Title="EditWindow" Height="350" Width="330">
+    <Grid>
+        <StackPanel Background=" #e2cfc4" Orientation="Vertical" >
+            <TextBlock Margin="5" Background="#d5bdaf" TextAlignment="Center" FontSize="20" Text="Detaily Žánru" FontWeight="Bold"/>
+            <Label HorizontalAlignment="Center" >Name</Label>
+            <TextBlock Margin="60,0,60,0" Height="20" Background="White" Text="{Binding Beruska2.name}"/>
+            <Label HorizontalAlignment="Center" >Zanr Id</Label>
+            <TextBlock Margin="60,0,60,0" Height="20" Background="White" Text="{Binding Beruska2.zanrid}"/>
+            <Button Margin="5" Command="{Binding FilmyVZanru}" Background="#ccd5ae" >Zobrazit filmy v zanru</Button>
+            <ListBox Height="100" ItemsSource="{Binding FilmikyVZanru}"  >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Text="{Binding name}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Margin="5" Click="Button_Click" Background="#ffdab9" >Storno</Button>
+        </StackPanel>
+    </Grid>
+</Window>

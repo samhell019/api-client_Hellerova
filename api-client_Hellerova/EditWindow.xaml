@@ -8,13 +8,13 @@
         Title="EditWindow" Height="350" Width="330">
     <Grid>
         <StackPanel Background=" #e2cfc4" Orientation="Vertical" >
-            <Label FontSize="20" HorizontalAlignment="Center" FontWeight="Bold">Edit Film</Label>
-            <Label Margin="10">Name</Label>
-            <TextBox Margin="10, 0, 50, 20" Text="{Binding EditedFilm.name}"/>
-            <Label  Margin="10">Zanr Id</Label>
-            <TextBox Margin="10, 0, 50, 20" Text="{Binding EditedFilm.zanrid}"/>
-            <Button Click="Button_Click_1" Command="{Binding SaveChangesCommand}" Background="#ccd5ae" Margin="10, 0, 50, 20">Save changes</Button>
-            <Button Click="Button_Click" Background="#ffdab9" Margin="10, 0, 50, 20">Storno</Button>
+            <TextBlock Margin="5" Background="#d5bdaf" TextAlignment="Center" FontSize="20" Text="Edit Film" FontWeight="Bold"/>
+            <Label HorizontalAlignment="Center">Name</Label>
+            <TextBox Margin="60,0,60,0" Height="20" Text="{Binding EditedFilm.name}"/>
+            <Label  HorizontalAlignment="Center" >Zanr Id</Label>
+            <TextBox Margin="60,0,60,0" Height="20" Text="{Binding EditedFilm.zanrid}"/>
+            <Button Click="Button_Click_1" Command="{Binding SaveChangesCommand}" Background="#ccd5ae" Margin="20">Save changes</Button>
+            <Button Click="Button_Click" Background="#ffdab9" Margin="20">Storno</Button>
         </StackPanel>
     </Grid>
 </Window>

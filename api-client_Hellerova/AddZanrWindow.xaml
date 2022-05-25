@@ -1,17 +1,17 @@
-﻿<Window x:Class="api_client_Hellerova.EditZanrWindow"
+﻿<Window x:Class="api_client_Hellerova.AddZanrWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:api_client_Hellerova"
         mc:Ignorable="d"
-        Title="EditZanrWindow" Height="350" Width="330">
+        Title="AddZanrWindow" Height="350" Width="330">
     <Grid>
         <StackPanel Background=" #e2cfc4" Orientation="Vertical" >
-            <TextBlock Margin="5" Background="#d5bdaf" TextAlignment="Center" FontSize="20" Text="Edit Žánr" FontWeight="Bold"/>
-            <Label HorizontalAlignment="Center" >Name</Label>
-            <TextBox Margin="60,0,60,0" Height="20" Text="{Binding EditedZanr.name}"/>
-            <Button Click="Button_Click_1" Command="{Binding SaveChangesCommand}" Background="#ccd5ae" Margin="20">Save changes</Button>
+            <TextBlock Margin="5" Background="#d5bdaf" TextAlignment="Center" FontSize="20" Text="Přidat Žánr" FontWeight="Bold"/>
+            <Label HorizontalAlignment="Center" Margin="10">Name</Label>
+            <TextBox  Margin="60,0,60,0" Height="20" Text="{Binding NewZanr.name}"/>
+            <Button Click="Button_Click_1" Command="{Binding AddNewZanrCommand}" Background="#ccd5ae" Margin="20">Save changes</Button>
             <Button Click="Button_Click" Background="#ffdab9" Margin="20">Storno</Button>
         </StackPanel>
     </Grid>
